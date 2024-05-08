@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="pt-Br">
+
+<head>
+    <!-- Recommended meta tags -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <!-- PyScript CSS -->
+    <link rel="stylesheet" href="https://pyscript.net/releases/2024.3.2/core.css">
+    <!-- This script tag bootstraps PyScript -->
+    <script type="module" src="https://pyscript.net/releases/2024.3.2/core.js"></script>
+    <style>
+        #loading {
+            outline: none;
+            border: none;
+            background: transparent
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <link href="./output.css" rel="stylesheet">
+</head>
+
+<body class="bg-slate-100 dark:bg-slate-800" id="body">
+    <dialog id="loading" class="w-10 h-10">
+        <div role="status">
+            <svg aria-hidden="true" class="inline w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600"
+                viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                    d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
+                    fill="currentColor" />
+                <path
+                    d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
+                    fill="currentFill" />
+            </svg>
+            <span class="sr-only">Loading...</span>
+        </div>
+    </dialog>
+    <nav class="bg-white border-gray-200 dark:bg-gray-900" id="nav">
+        <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto">
+            <h1 class="text-3xl font-extrabold dark:text-white">SIFI-EFD</h1>
+            <div class="hidden w-full md:block md:w-auto" id="navbar-default">
+                <ul
+                    class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+                    <!-- some lis -->
+                    <li>
+                    </li>
+                    <li>
+                        <button id="theme-toggle" type="button"
+                            class="text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2.5">
+                            <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5" fill="currentColor"
+                                viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+                            </svg>
+                            <svg id="theme-toggle-light-icon" class="hidden w-5 h-5" fill="currentColor"
+                                viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"
+                                    fill-rule="evenodd" clip-rule="evenodd"></path>
+                            </svg>
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <main class="flex">
+        <section id="dropzones" class="flex flex-col gap-8 max-w-sm px-10 mt-16">
+            <div class="w-full">
+                <label for="select-table" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Selecione
+                    uma opção</label>
+                <select id="select-table"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    <option selected>Selecione uma tabela</option>
+                    <option value="siafi">Siafi</option>
+                    <option value="efd">Efd</option>
+                    <option value="siafi&efd">Siafi e Efd</option>
+                    <option value="siafi-efd">Análise</option>
+                </select>
+            </div>
+            <p class="-mb-6 block text-sm font-medium text-gray-900 dark:text-white">Deletar uma tabela</p>
+            <div class="flex rounded-md shadow-sm h-16 w-full">
+                <button type="button" disabled id="delete-siafi-btn"
+                    class="px-4 py-2 w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-s-lg hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:hover:text-white dark:hover:bg-gray-700 dark:focus:ring-blue-500 dark:focus:text-white">
+                    Siafi
+                </button>
+                <button type="button" disabled id="delete-efd-btn"
+                    class="px-4 py-2 w-full text-sm font-medium rounded-e-lg  text-gray-900 bg-white border-t border-b border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:hover:text-white dark:hover:bg-gray-700 dark:focus:ring-blue-500 dark:focus:text-white">
+                    Efd
+                </button>
+            </div>
+                <label for="siafi-file-input"
+                    class="flex flex-col items-center justify-center w-full h-40 border-2 border-green-500 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600 "
+                    id="siafi-file-dropzone">
+                    <div class="flex flex-col items-center justify-center pt-5 pb-6 pointer-events-none">
+                        <svg class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400  pointer-events-none"
+                            aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"
+                                class=" pointer-events-none" />
+                        </svg>
+                        <p class="mb-2 text-sm text-gray-500 dark:text-gray-400  pointer-events-none"><span
+                                class="font-semibold  pointer-events-none">Click para
+                                enviar SIAFI</span></p>
+                        <p class="text-xs text-gray-500 dark:text-gray-400  pointer-events-none">.XLSX</p>
+                    </div>
+                    <input id="siafi-file-input" type="file" class="hidden" />
+                </label>
+                <label for="efd-file-input"
+                    class="flex flex-col items-center justify-center w-full h-40 border-2 border-red-500 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600"
+                    id="efd-file-dropzone">
+                    <div class="flex flex-col items-center justify-center pt-5 pb-6">
+                        <svg class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
+                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2" />
+                        </svg>
+                        <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">Click para
+                                enviar EFD</span></p>
+                        <p class="text-xs text-gray-500 dark:text-gray-400">.XLSX</p>
+                    </div>
+                    <input id="efd-file-input" type="file" class="hidden" />
+                </label>
+        </section>
+        <section class="flex gap-10" id="outputs-info">
+            <section id="siafi-output-info"></section>
+            <section id="efd-output-info"></section>
+            <section id="siafi-efd-output-info"></section>
+        </section>
+        <section class="flex gap-10" id="outputs">
+            <section id="siafi-output"></section>
+            <section id="efd-output"></section>
+            <section id="parse-output"></section>
+        </section>
+    </main>
+    <div id="pandas-dev-console" hidden>
+        <h3>Dev Console</h3>
+        <script type="py" terminal></script>
+    </div>
+</body>
+<script type="py" src="./main.py" config="./pyscript.toml"></script>
+<script type="module" src="./index.js"></script>
+
+</html>

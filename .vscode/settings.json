@@ -1,0 +1,10 @@
+{
+  "flake8.args": [
+    "--config=--max-line-length=120"
+  ],
+  "pylint.args": [
+    "--disable=E0401,E0402,E1121,reportMissingImports",
+    "--max-line-length=120"
+  ],
+  "python.analysis.typeCheckingMode": "basic"
+}

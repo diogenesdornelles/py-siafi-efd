@@ -1,0 +1,29 @@
+{% if ready %}
+<div
+  class="block max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 mt-16"
+  id="{{ _id }}">
+  <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-500 dark:text-gray-400">{{ name }}</h5>
+  <dl class="max-w-md text-gray-900 divide-y divide-gray-200 dark:text-white dark:divide-gray-700">
+    <div class="flex flex-col pb-3">
+      <dt class="mb-1 text-gray-500 md:text-lg dark:text-gray-400">Valor Total</dt>
+      <dd class="text-lg font-semibold">{{ describe.sum }}</dd>
+    </div>
+    <div class="flex flex-col py-3">
+      <dt class="mb-1 text-gray-500 md:text-lg dark:text-gray-400">Valor Médio</dt>
+      <dd class="text-lg font-semibold">{{ describe.mean }}</dd>
+    </div>
+    <div class="flex flex-col pt-3">
+      <dt class="mb-1 text-gray-500 md:text-lg dark:text-gray-400">Valor Máximo</dt>
+      <dd class="text-lg font-semibold">{{ describe.max }}</dd>
+    </div>
+    <div class="flex flex-col pt-3">
+      <dt class="mb-1 text-gray-500 md:text-lg dark:text-gray-400">Valor Mínimo</dt>
+      <dd class="text-lg font-semibold">{{ describe.min }}</dd>
+    </div>
+    <div class="flex flex-col pt-3">
+      <dt class="mb-1 text-gray-500 md:text-lg dark:text-gray-400">Qtn. CNPJ</dt>
+      <dd class="text-lg font-semibold"> {{ describe.count }}</dd>
+    </div>
+  </dl>
+</div>
+{% endif %}

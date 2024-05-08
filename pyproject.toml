@@ -1,0 +1,23 @@
+[tool.poetry]
+name = "py-siafi-efd"
+version = "0.1.0"
+description = "parse siafi-efd sheets with pandas - python in frontend"
+authors = ["diogenesdornelles"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+
+
+[tool.poetry.group.dev.dependencies]
+flake8 = "^7.0.0"
+mypy = "^1.9.0"
+pytest = "^8.1.1"
+pylint = "^3.1.0"
+isort = "^5.13.2"
+black = "^24.4.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

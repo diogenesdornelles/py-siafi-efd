@@ -1,0 +1,29 @@
+name = "siafi-efd-py"
+description = "Parse sheets Siafi-efd with Pandas"
+packages = ["pandas", "openpyxl", "pytest", "numpy", "jinja2", "babel"]
+
+
+[files]
+"./components/component.py" = "./components/component.py"
+"./components/tables.py" = "./components/tables.py"
+"./components/infos.py" = "./components/infos.py"
+
+"./pub_sub/pub_sub.py" = "./pub_sub/pub_sub.py"
+"./pub_sub/change_disabled.py" = "./pub_sub/change_disabled.py"
+
+"./sheets/table.py" = "./sheets/table.py"
+"./sheets/efd.py" = "./sheets/efd.py"
+"./sheets/siafi.py" = "./sheets/siafi.py"
+"./sheets/parse.py" = "./sheets/parse.py"
+
+"./templates/empty.html" = "./templates/empty.html"
+"./templates/table.html" = "./templates/table.html"
+"./templates/table_info.html" = "./templates/table_info.html"
+"./templates/parse_info.html" = "./templates/parse_info.html"
+
+"./utils/integer_converter.py" = "./utils/integer_converter.py"
+"./utils/float_converter.py" = "./utils/float_converter.py"
+"./utils/format_brl_currency.py" = "./utils/format_brl_currency.py"
+
+"./listeners.py" = ""
+
