@@ -1,6 +1,6 @@
 import re
-from typing import Any
 from functools import lru_cache
+from typing import Any
 
 
 @lru_cache

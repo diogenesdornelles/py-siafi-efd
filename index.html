@@ -63,7 +63,7 @@
             </div>
         </div>
     </nav>
-    <main class="flex">
+    <main class="flex mb-16">
         <section id="dropzones" class="flex flex-col gap-8 max-w-sm px-10 mt-16">
             <div class="w-full">
                 <label for="select-table" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Selecione
@@ -121,23 +121,21 @@
                     <input id="efd-file-input" type="file" class="hidden" />
                 </label>
         </section>
-        <section class="flex gap-10" id="outputs-info">
-            <section id="siafi-output-info"></section>
-            <section id="efd-output-info"></section>
-            <section id="siafi-efd-output-info"></section>
-        </section>
-        <section class="flex gap-10" id="outputs">
-            <section id="siafi-output"></section>
-            <section id="efd-output"></section>
-            <section id="parse-output"></section>
-        </section>
+        <div class="flex mt-16 w-full justify-center">
+            <section class="flex gap-4 mt-20" id="outputs-info">
+                <section id="siafi-output-info" class="w-fit"></section>
+                <section id="efd-output-info" class="w-fit"></section>
+                <section id="parse-output-info" class="w-fit"></section>
+            </section>
+            <section class="flex gap-4" id="outputs">
+                <section id="siafi-output"></section>
+                <section id="efd-output"></section>
+                <section id="parse-output" ></section>
+            </section>
+        </div>
     </main>
-    <div id="pandas-dev-console" hidden>
-        <h3>Dev Console</h3>
-        <script type="py" terminal></script>
-    </div>
 </body>
 <script type="py" src="./main.py" config="./pyscript.toml"></script>
-<script type="module" src="./index.js"></script>
-
+<script type="module" src="./utils/darkMode.js"></script>
+<script type="module" src="./utils/loading.js"></script>
 </html>

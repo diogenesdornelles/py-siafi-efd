@@ -1,11 +1,12 @@
-from components.component import Variables
+import numpy as np  # type: ignore
+from pandas import DataFrame
+
+from components.component import Component, Variables
+from pub_sub.pub_sub import pub_sub
 from utils.float_converter import float_converter
 from utils.integer_converter import integer_converter
-import numpy as np  # type: ignore
-from pub_sub.pub_sub import pub_sub
-from components.component import Component
+
 from .table import Table
-from pandas import DataFrame
 
 
 class Efd(Table):
@@ -36,6 +37,8 @@ class Efd(Table):
             self._df.sort_values(by="CNPJ", inplace=True)
             self._df.reset_index(drop=True, inplace=True)
             self._df.set_index(np.arange(1, self._df.shape[0] + 1), inplace=True)
+            self._df.fillna(0.00, inplace=True)
+            
 
     def set_view(self) -> None:
         if isinstance(self._df, DataFrame):

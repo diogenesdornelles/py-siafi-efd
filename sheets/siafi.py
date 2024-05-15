@@ -1,13 +1,14 @@
+import numpy as np  # type: ignore
 import pandas as pd
-from pandas import Series, DataFrame
+from pandas import DataFrame, Series
 from pandas.core.groupby import DataFrameGroupBy
-from components.component import Variables
+
+from components.component import Component, Variables
+from pub_sub.pub_sub import pub_sub
 from utils.float_converter import float_converter
 from utils.integer_converter import integer_converter
-import numpy as np  # type: ignore
+
 from .table import Table
-from components.component import Component
-from pub_sub.pub_sub import pub_sub
 
 
 class Siafi(Table):
@@ -35,6 +36,7 @@ class Siafi(Table):
             self._df["VALOR"] = self._df["VALOR"].apply(float_converter)
             self._df.sort_values(by="RECOLHEDOR", inplace=True)
             self._df.reset_index(drop=True, inplace=True)
+            self._df.fillna(0.00, inplace=True)
 
     def apply_groupby(self) -> None:
         """_summary_"""

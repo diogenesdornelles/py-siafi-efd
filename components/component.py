@@ -1,7 +1,7 @@
-from typing import Hashable, Literal, Any
+from typing import Any, Hashable, Literal, TypedDict
+
 from jinja2 import Environment, FileSystemLoader, Template  # type: ignore
 from js import alert  # type: ignore
-from typing import TypedDict
 
 env = Environment(loader=FileSystemLoader("./templates"))
 
@@ -17,12 +17,14 @@ class Variables(TypedDict, total=False):
 class Component:
     def __init__(
         self,
+        *, 
         name: str,
         template: str,
         _id: str,
         parent_id: str,
-        btn_id: str,
-        value: str,
+        btn_id: str = "",
+        value: str = "",
+        src: str = "",
         _class: str = "",
         display: Literal["flex", "hidden", "grid", "block"] = "block",
         variables: Variables = {
@@ -41,6 +43,7 @@ class Component:
         self._parent_id = parent_id
         self._btn_id = btn_id
         self._value = value
+        self._src = src
         self._env = Environment(loader=FileSystemLoader("./templates"))
         try:
             self._template: Template = self._env.get_template(template)
@@ -55,6 +58,14 @@ class Component:
     @name.setter
     def name(self, new_name: str) -> None:
         self._name = new_name
+
+    @property
+    def src(self) -> str:
+        return self._name
+
+    @src.setter
+    def src(self, new_src: str) -> None:
+        self._name = new_src
 
     @property
     def id_(self) -> str:
@@ -132,7 +143,11 @@ class Component:
     def render(self) -> str:
         try:
             template = self._template.render(
-                name=self._name, _id=self._id, _class=self._class, **self._variables
+                name=self._name,
+                _id=self._id,
+                _class=self._class,
+                src=self._src,
+                **self._variables
             )
             return template
         except TypeError as ts:

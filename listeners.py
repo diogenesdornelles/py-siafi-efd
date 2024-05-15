@@ -1,13 +1,14 @@
-from js import alert  # type: ignore
 from io import BytesIO
+
+from js import alert  # type: ignore
 from pyscript import when  # type: ignore
-from sheets.siafi import Siafi
+
+from components.infos import efd_info, parse_info, siafi_info
+from components.tables import efd_table, parse_table, siafi_table
+from pub_sub.pub_sub import pub_sub
 from sheets.efd import Efd
 from sheets.parse import Parse
-from components.tables import parse_table, efd_table, siafi_table
-from components.infos import siafi_info, efd_info, parse_info
-from pub_sub.pub_sub import pub_sub
-
+from sheets.siafi import Siafi
 
 parse = Parse(parse_table, parse_info)
 siafi = Siafi(

@@ -1,29 +1,22 @@
 from .component import Component
 
-
 siafi_info = Component(
-    "Siafi - informações gerais",
-    "table_info.html",
-    "siafi-info",
-    "siafi-output-info",
-    "",
-    "",
+    name="Siafi - informações gerais",
+    template="table_info.html",
+    _id="siafi-info",
+    parent_id="siafi-output-info"
 )
 
 efd_info = Component(
-    "Efd - informações gerais",
-    "table_info.html",
-    "efd-info",
-    "efd-output-info",
-    "",
-    "",
+    name="Efd - informações gerais",
+    template="table_info.html",
+    _id="efd-info",
+    parent_id="efd-output-info"
 )
 
 parse_info = Component(
-    "Siafi & Efd - informações gerais",
-    "parse_info.html",
-    "siafi-efd-info",
-    "siafi-efd-output-info",
-    "",
-    "",
+    name="Siafi & Efd - informações gerais",
+    template="parse_info.html",
+    _id="parse-info",
+    parent_id="parse-output-info"
 )

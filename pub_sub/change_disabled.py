@@ -9,6 +9,11 @@ def set_enabled(element_id: str) -> None:
 
 
 def set_disabled(element_id: str) -> None:
+    """_summary_
+
+    Args:
+        element_id (str): _description_
+    """
     try:
         docpy.getElementById(f"{element_id}").setAttribute("disabled", True)
     except Exception as er:
