@@ -1,49 +1,47 @@
 {% if ready %}
 <div class="grid grid-cols-1 gap-4 " id="{{ _id }}">
+  {% set siafi_color = "blue" %}
+  {% set efd_color = "red" %}
   <div
     class="block p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
     <h5 class="mb-2 text-lg font-bold tracking-tight text-gray-900 dark:text-white">Siafi a maior <span
-        class="mb-2 text-lg font-bold tracking-tight text-blue-700 dark:text-white">(+)</span></h5>
+        class="mb-2 text-lg font-bold tracking-tight text-{{ siafi_color }}-700 dark:text-white">(+)</span></h5>
     <p class="font-bold text-gray-700 dark:text-gray-400">Soma:</p>
-    <span class="mb-2 text-lg font-bold tracking-tight text-blue-700 dark:text-white">{{ describe.greater_siafi_sum
-      }}</span>
+    <span class="mb-2 text-lg font-bold tracking-tight text-{{ siafi_color }}-700 dark:text-white">{{ describe.greater_siafi_sum }}</span>
   </div>
   <div
     class="block p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
     <h5 class="mb-2 text-lg font-bold tracking-tight text-gray-900 dark:text-white">Siafi a maior</h5>
     <p class="font-bold text-gray-700 dark:text-gray-400">Quantidade:</p>
-    <span class="mb-2 text-lg font-bold tracking-tight text-blue-700 dark:text-white">{{ describe.greater_siafi_count
-      }}</span>
+    <span class="mb-2 text-lg font-bold tracking-tight text-{{ siafi_color }}-700 dark:text-white">{{ describe.greater_siafi_count }}</span>
   </div>
   <div
     class="block p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
     <h5 class="mb-2 text-lg font-bold tracking-tight text-gray-900 dark:text-white">Siafi a maior</h5>
     {% for recolhedor in describe.greater_siafi_recolhedor %}
     <p class="font-bold text-gray-700 dark:text-gray-400">Recolhedor:</p>
-    <span class="mb-2 text-lg font-bold tracking-tight text-blue-700 dark:text-white">{{ recolhedor }}</span>
+    <span class="mb-2 text-lg font-bold tracking-tight text-{{ siafi_color }}-700 dark:text-white">{{ recolhedor }}</span>
     {% endfor %}
   </div>
   <div
     class="block p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
     <h5 class="mb-2 text-lg font-bold tracking-tight text-gray-900 dark:text-white">Efd a maior <span
-        class="mb-2 text-lg font-bold tracking-tight text-red-600 dark:text-white">(-)</span></h5>
+        class="mb-2 text-lg font-bold tracking-tight text-{{ efd_color }}-600 dark:text-white">(-)</span></h5>
     <p class="font-bold text-gray-700 dark:text-gray-400">Soma:</p>
-    <span class="mb-2 text-lg font-bold tracking-tight text-red-600 dark:text-white">{{ describe.greater_efd_sum
-      }}</span>
+    <span class="mb-2 text-lg font-bold tracking-tight text-{{ efd_color }}-600 dark:text-white">{{ describe.greater_efd_sum }}</span>
   </div>
   <div
     class="block p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
     <h5 class="mb-2 text-lg font-bold tracking-tight text-gray-900 dark:text-white">Efd a maior</h5>
     <p class="font-bold text-gray-700 dark:text-gray-400">Quantidade:</p>
-    <span class="mb-2 text-lg font-bold tracking-tight text-red-600 dark:text-white">{{ describe.greater_efd_count
-      }}</span>
+    <span class="mb-2 text-lg font-bold tracking-tight text-{{ efd_color }}-600 dark:text-white">{{ describe.greater_efd_count }}</span>
   </div>
   <div
     class="block p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
     <h5 class="mb-2 text-lg font-bold tracking-tight text-gray-900 dark:text-white">Efd a maior</h5>
     {% for cnpj in describe.greater_efd_cnpj %}
     <p class="font-bold text-gray-700 dark:text-gray-400">Cnpj:</p>
-    <span class="mb-2 text-lg font-bold tracking-tight text-red-600 dark:text-white">{{ cnpj }}</span>
+    <span class="mb-2 text-lg font-bold tracking-tight text-{{ efd_color }}-600 dark:text-white">{{ cnpj }}</span>
     {% endfor %}
   </div>
   <div

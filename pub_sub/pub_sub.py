@@ -1,3 +1,11 @@
+"""
+This module implements PubSub class, in pub_sub pattern, to handle frontend dynamic changes.
+
+Author: Diógenes Dornelles Costa
+Creation Date: May 15, 2024
+Version: 1.0
+"""
+
 from collections import OrderedDict
 
 from pyscript import document as docpy  # type: ignore
@@ -8,6 +16,17 @@ from .change_disabled import set_disabled, set_enabled
 
 
 class PubSub:
+    """_summary_
+
+    Raises:
+        ValueError: _description_
+        ValueError: _description_
+        ValueError: _description_
+        ValueError: _description_
+
+    Returns:
+        _type_: _description_
+    """
     _instance = None
 
     def __new__(cls):
@@ -40,10 +59,8 @@ class PubSub:
             if component.name not in self._components:
                 self._components[component.name] = component
                 return
-            else:
-                raise ValueError("Component already subscribed")
-        else:
-            raise ValueError("Component must be an instance of 'Component'")
+            raise ValueError("Component already subscribed")
+        raise ValueError("Component must be an instance of 'Component'")
 
     def unsubscribe(self, name: str) -> None:
         """Unsubscribes a component.

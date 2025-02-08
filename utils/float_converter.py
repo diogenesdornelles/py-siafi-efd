@@ -1,3 +1,11 @@
+"""
+This module contains functions for convert values to float.
+
+Author: Diogenes Dornelles Costa
+Creation Date: May 15, 2024
+Version: 1.0
+"""
+
 import re
 from functools import lru_cache
 from typing import Any

@@ -1,3 +1,11 @@
+"""
+This module contains a class to manage Parse sheets.
+
+Author: Diógenes Dornelles Costa
+Creation Date: May 15, 2024
+Version: 1.0
+"""
+
 from typing import Any, Hashable
 
 import matplotlib.pyplot as plt
@@ -14,9 +22,16 @@ from utils.format_brl_currency import format_brl_currency
 
 
 class Parse:
-    """ """
+    """Class representing Parse sheets."""
 
     def __init__(self, table: Component, info: Component) -> None:
+        """Initialize Parse instance.
+
+        Args:
+            table (Component): Component for table.
+            info (Component): Information component.
+        Returns None
+        """
         self._df: DataFrame | None = None
         self._siafi = None
         self._efd = None
@@ -31,53 +46,102 @@ class Parse:
 
     @property
     def df(self) -> DataFrame | None:
+        """Get the DataFrame representing the Parse sheet.
+
+        Returns:
+            DataFrame | None: DataFrame representing the Parse sheet.
+        """
         return self._df
 
     @property
     def siafi(self) -> Siafi | None:
+        """Get the Siafi instance associated with the Parse sheet.
+
+        Returns:
+            Siafi | None: Siafi instance associated with the Parse sheet.
+        """
         return self._siafi
 
     @siafi.setter
     def siafi(self, value: Siafi) -> None:
+        """Set the Siafi instance associated with the Parse sheet.
+
+        Args:
+            value (Siafi): Siafi instance.
+        """
         self._siafi = value
         self.pipeline()
 
     @property
     def efd(self) -> Efd | None:
+        """Get the Efd instance associated with the Parse sheet.
+
+        Returns:
+            Efd | None: Efd instance associated with the Parse sheet.
+        """
         return self._efd
 
     @efd.setter
     def efd(self, value: Efd) -> None:
+        """Set the Efd instance associated with the Parse sheet.
+
+        Args:
+            value (Efd): Efd instance.
+        """
         self._efd = value
         self.pipeline()
 
     def pipeline(self) -> None:
+        """Execute the pipeline for Parse sheets.
+        Returns: None"""
         self.parse()
         self.sanitize_columns()
         self.set_siafi_greater()
         self.set_efd_greater()
         self.set_dict()
         self.set_describe()
-        self.set_plot()
+        self.plot()
         self.set_view()
 
     @property
     def as_dict(self) -> dict[Hashable, Any] | None:
+        """Get the Parse sheet represented as a dictionary.
+
+        Returns:
+            dict[Hashable, Any] | None: Parse sheet represented as a dictionary.
+        """
         return self._as_dict
 
     @property
     def table(self) -> Component:
+        """Get the table component associated with the Parse sheet.
+
+        Returns:
+            Component: Table component associated with the Parse sheet.
+        """
         return self._table
 
     @property
     def info(self) -> Component:
+        """Get the information component associated with the Parse sheet.
+
+        Returns:
+            Component: Information component associated with the Parse sheet.
+        """
         return self._info
 
     @property
     def describe(self) -> dict[Hashable, Any]:
+        """Get descriptive statistics of the Parse sheet.
+
+        Returns:
+            dict[Hashable, Any]: Descriptive statistics of the Parse sheet.
+        """
         return self._describe
 
-    def parse(self):
+    def parse(self) -> None:
+        """Parse the data from Siafi and Efd sheets
+        Returns: None"""
         if (isinstance(self._siafi, Siafi)) and (
             isinstance(self._efd, Efd)
             and (isinstance(self._efd.df, DataFrame))
@@ -96,8 +160,9 @@ class Parse:
             self._df.reset_index(drop=True, inplace=True)
             self._df.set_index(np.arange(1, self._df.shape[0] + 1), inplace=True)
 
-    def sanitize_columns(self):
-        """_summary_"""
+    def sanitize_columns(self) -> None:
+        """Sanitize columns of the Parse sheet
+        Returns: None"""
         if isinstance(self._df, DataFrame):
             self._df["RECOLHEDOR"] = self._df["RECOLHEDOR"].astype(
                 "Int64",
@@ -130,6 +195,8 @@ class Parse:
             self._df.reset_index(drop=True, inplace=True)
 
     def set_siafi_greater(self) -> None:
+        """Set rows where the Siafi value is greater than the Efd value
+        Returns None"""
         if isinstance(self._df, DataFrame):
             self._df_siafi_greater = self._df[
                 self._df["VALOR_SIAFI"] > self._df["VALOR_EFD"]
@@ -137,6 +204,8 @@ class Parse:
             self._df_siafi_greater = self._df_siafi_greater.reset_index()
 
     def set_efd_greater(self) -> None:
+        """Set rows where the Efd value is greater than the Siafi value
+        Returns: None"""
         if isinstance(self._df, DataFrame):
             self._df_efd_greater = self._df[
                 self._df["VALOR_EFD"] > self._df["VALOR_SIAFI"]
@@ -144,10 +213,13 @@ class Parse:
             self._df_efd_greater = self._df_efd_greater.reset_index()
 
     def set_dict(self) -> None:
+        """Set table as dict. Returns: None"""
         if isinstance(self._df, DataFrame):
             self._as_dict = self._df.to_dict(orient="list")
 
     def set_describe(self) -> None:
+        """Set table describe
+        Returns: None"""
         if (
             isinstance(self._df, DataFrame)
             and isinstance(self._df_siafi_greater, DataFrame)
@@ -171,7 +243,9 @@ class Parse:
                 round(self._df["VALOR_SIAFI"].sum() - self._df["VALOR_EFD"].sum(), 2)
             )
 
-    def set_plot(self) -> None:
+    def plot(self) -> None:
+        """Plot differences
+        Returns: None"""
         if isinstance(self._df, DataFrame):
             concatenated_df = pd.concat(
                 [
@@ -180,7 +254,9 @@ class Parse:
                 ],
                 axis=0,
             )
-            concatenated_df.set_index(np.arange(1, concatenated_df.shape[0] + 1), inplace=True)
+            concatenated_df.set_index(
+                np.arange(1, concatenated_df.shape[0] + 1), inplace=True
+            )
             plt.figure(figsize=(10, 6))
             data = [
                 f"Rec-{rec}\nCNPJ-{cnpj}"
@@ -194,7 +270,7 @@ class Parse:
                 palette=[
                     "red" if x < 0 else "blue" for x in concatenated_df["DIFERENÇAS"]
                 ],
-                hue=data
+                hue=data,
             )
             plt.xlabel("Recolhedor e CNPJ")
             plt.ylabel("Diferenças")
@@ -212,13 +288,13 @@ class Parse:
                     color="black",
                 )
 
-            plt.axhline(
-                0, color="black", linewidth=0.5
-            )
+            plt.axhline(0, color="black", linewidth=0.5)
             plt.tight_layout()
             plt.show()
 
     def set_view(self) -> None:
+        """Set table view
+        Returns: None"""
         if isinstance(self._df, DataFrame):
             self._table.variables = Variables(
                 table=self._as_dict,

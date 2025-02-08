@@ -1,3 +1,12 @@
+"""
+This module contains a table component instances.
+
+Author: Diógenes Dornelles Costa
+Creation Date: May 15, 2024
+Version: 1.0
+"""
+
+
 from .component import Component
 
 siafi_table = Component(

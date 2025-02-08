@@ -63,8 +63,12 @@
             </div>
         </div>
     </nav>
+    <div class="p-4 mb-4 text-sm text-blue-800 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400" role="alert">
+        <span class="font-medium">Olá!</span> Para utilizar a aplicação, basta importar ambas as planilhas contendo as colunas RECOLHEDOR, DOCUMENTO e VALOR (Para SIAFI) e CNPJ, CNO, VALOR (Para EFD). Após, verificar tabela Análise no menu Opção.
+      </div>
     <main class="flex mb-16">
-        <section id="dropzones" class="flex flex-col gap-8 max-w-sm px-10 mt-16">
+
+        <section id="dropzones" class="flex flex-col gap-8 w-[250px] px-6 mt-16">
             <div class="w-full">
                 <label for="select-table" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Selecione
                     uma opção</label>
@@ -77,15 +81,10 @@
                     <option value="siafi-efd">Análise</option>
                 </select>
             </div>
-            <p class="-mb-6 block text-sm font-medium text-gray-900 dark:text-white">Deletar uma tabela</p>
             <div class="flex rounded-md shadow-sm h-16 w-full">
-                <button type="button" disabled id="delete-siafi-btn"
-                    class="px-4 py-2 w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-s-lg hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:hover:text-white dark:hover:bg-gray-700 dark:focus:ring-blue-500 dark:focus:text-white">
-                    Siafi
-                </button>
-                <button type="button" disabled id="delete-efd-btn"
-                    class="px-4 py-2 w-full text-sm font-medium rounded-e-lg  text-gray-900 bg-white border-t border-b border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:hover:text-white dark:hover:bg-gray-700 dark:focus:ring-blue-500 dark:focus:text-white">
-                    Efd
+                <button type="button" id="re-send-btn"
+                    class="px-4 py-2 w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:hover:text-white dark:hover:bg-gray-700 dark:focus:ring-blue-500 dark:focus:text-white">
+                    Reenviar arquivos
                 </button>
             </div>
                 <label for="siafi-file-input"

@@ -1,3 +1,11 @@
+"""
+This module contains a class to manage Siafi sheets.
+
+Author: Diógenes Dornelles Costa
+Creation Date: May 15, 2024
+Version: 1.0
+"""
+
 import numpy as np  # type: ignore
 import pandas as pd
 from pandas import DataFrame, Series
@@ -9,20 +17,24 @@ from utils.float_converter import float_converter
 from utils.integer_converter import integer_converter
 
 from .table import Table
+from js import alert, window  # type: ignore
 
 
 class Siafi(Table):
-    """_summary_"""
+    """Class representing Siafi sheets."""
 
     def __init__(self, names: list[str], component: Component, info: Component) -> None:
-        """_summary_
+        """Initialize Siafi instance.
 
         Args:
-            file (_type_): _description_
+            names (list[str]): Column names for the Siafi sheet.
+            component (Component): Component.
+            info (Component): Information component.
         """
         super().__init__(names, component, info)
 
     def pipeline(self) -> None:
+        """Execute the pipeline for Siafi sheets. Returns None"""
         self.sanitize_columns()
         self.apply_groupby()
         self.set_dict()
@@ -30,29 +42,38 @@ class Siafi(Table):
         self.set_view()
 
     def sanitize_columns(self):
-        """_summary_"""
+        """Sanitize columns of the Siafi sheet. Returns None"""
         if isinstance(self._df, DataFrame):
-            self._df["RECOLHEDOR"] = self._df["RECOLHEDOR"].apply(integer_converter)
-            self._df["VALOR"] = self._df["VALOR"].apply(float_converter)
-            self._df.sort_values(by="RECOLHEDOR", inplace=True)
-            self._df.reset_index(drop=True, inplace=True)
-            self._df.fillna(0.00, inplace=True)
+            try:
+                self._df["RECOLHEDOR"] = self._df["RECOLHEDOR"].apply(integer_converter)
+                self._df["VALOR"] = self._df["VALOR"].apply(float_converter)
+                self._df.sort_values(by="RECOLHEDOR", inplace=True)
+                self._df.reset_index(drop=True, inplace=True)
+                self._df.fillna(0.00, inplace=True)
+            except Exception as er:
+                alert(f"Erro: {er}")
+                window.location.reload()
 
     def apply_groupby(self) -> None:
-        """_summary_"""
+        """Apply groupby operation on the Siafi sheet. Returns None"""
         if isinstance(self.df, DataFrame):
-            recolhedores_group: DataFrameGroupBy = self.df.groupby("RECOLHEDOR")  # type: ignore
-            documents_count: Series = recolhedores_group["DOCUMENTO"].count()
-            sum_values: Series = recolhedores_group["VALOR"].sum()
-            data = {
-                "DOCUMENTO": documents_count,
-                "VALOR": sum_values,
-            }
-            self._df = pd.DataFrame(data=data).reset_index()
-            self._df["VALOR"] = self._df["VALOR"].round(2)
-            self._df.index = np.arange(1, len(self._df) + 1)
+            try:
+                recolhedores_group: DataFrameGroupBy = self.df.groupby("RECOLHEDOR")
+                documents_count: Series = recolhedores_group["DOCUMENTO"].count()
+                sum_values: Series = recolhedores_group["VALOR"].sum()
+                data = {
+                    "DOCUMENTO": documents_count,
+                    "VALOR": sum_values,
+                }
+                self._df = pd.DataFrame(data=data).reset_index()
+                self._df["VALOR"] = self._df["VALOR"].round(2)
+                self._df.index = np.arange(1, len(self._df) + 1)
+            except Exception as er:
+                alert(f"Erro: {er}")
+                window.location.reload()
 
     def set_view(self) -> None:
+        """Set the view for Siafi sheets. Returns None"""
         if isinstance(self._df, DataFrame):
             self._table.variables = Variables(
                 table=self._as_dict,
